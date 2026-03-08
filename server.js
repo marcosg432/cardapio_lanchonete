@@ -1,10 +1,18 @@
 /**
  * Servidor estático para Cardápio Lanchonete - Porta 3004
- * Compatível com PM2
+ * Compatível com PM2 - não usa dependências externas
  */
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+
+// Remove node_modules que causa ERR_REQUIRE_ESM (projeto não tem dependências)
+try {
+  const nm = path.join(__dirname, 'node_modules');
+  if (fs.existsSync(nm)) {
+    fs.rmSync(nm, { recursive: true });
+  }
+} catch (_) {}
 
 const PORT = 3004;
 const MIME_TYPES = {
