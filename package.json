@@ -1,10 +1,7 @@
 {
   "name": "cardapio-lanchonete",
   "version": "1.0.0",
-  "description": "Cardápio Digital - Oswaldo Pizza & Lanches",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node server.js"
   }
 }
