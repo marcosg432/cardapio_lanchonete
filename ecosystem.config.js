@@ -3,10 +3,11 @@
  * Porta: 3004
  * Uso: pm2 start ecosystem.config.js
  */
+const path = require('path');
 module.exports = {
   apps: [{
     name: 'cardapio-lanchonete',
-    script: 'server.js',
+    script: path.join(__dirname, 'server.js'),
     cwd: __dirname,
     watch: false,
     env: {
