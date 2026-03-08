@@ -7,7 +7,8 @@ const path = require('path');
 module.exports = {
   apps: [{
     name: 'cardapio-lanchonete',
-    script: path.join(__dirname, 'server.js'),
+    script: path.join(__dirname, 'start.sh'),
+    interpreter: 'bash',
     cwd: __dirname,
     watch: false,
     env: {
