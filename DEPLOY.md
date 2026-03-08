@@ -2,32 +2,44 @@
 
 ## Correção do erro ERR_REQUIRE_ESM
 
-Se o app falhar com esse erro, siga estes passos:
+O erro acontece porque a pasta `node_modules` antiga (com o pacote `serve`) ainda existe.  
+O projeto usa apenas Node.js nativo e **não precisa de npm install**.
+
+### Comandos (copie e cole tudo de uma vez):
 
 ```bash
-# 1. Entre na pasta do projeto
+cd ~/cardapio_lanchonete && \
+pm2 delete cardapio-lanchonete 2>/dev/null; \
+pm2 delete cardapio-lanhonete 2>/dev/null; \
+rm -rf node_modules && \
+git pull origin main && \
+pm2 start ecosystem.config.js && \
+pm2 save && \
+echo "--- LOGS ---" && \
+pm2 logs cardapio-lanchonete --lines 5
+```
+
+### Ou execute um por um:
+
+```bash
 cd ~/cardapio_lanchonete
-
-# 2. Pare e remova o processo antigo (qualquer variação do nome)
-pm2 delete cardapio-lanchonete 2>/dev/null
-pm2 delete cardapio-lanhonete 2>/dev/null
-
-# 3. Atualize o código
-git pull origin main
-
-# 4. Remova node_modules antigo (contém serve que causa o erro)
+pm2 delete cardapio-lanchonete
 rm -rf node_modules
-
-# 5. Inicie com o servidor Node nativo (sem dependências)
+git pull origin main
 pm2 start ecosystem.config.js
-
-# 6. Salve
 pm2 save
-
-# 7. Verifique os logs
 pm2 logs cardapio-lanchonete
 ```
 
-Deve aparecer: `Cardápio rodando em http://0.0.0.0:3004`
+### Testar antes do PM2 (opcional):
+
+```bash
+cd ~/cardapio_lanchonete
+node server.js
+```
+
+Se aparecer "Cardápio rodando em http://0.0.0.0:3004", está correto. Pressione Ctrl+C e use o PM2.
+
+---
 
 Acesse: http://SEU_IP:3004
